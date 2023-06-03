@@ -1,0 +1,236 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Purchase Return | APP24</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="{% static 'vendors/mdi/css/materialdesignicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.base.css' %}">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="{% static 'vendors/flag-icon-css/css/flag-icon.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendors/jvectormap/jquery-jvectormap.css' %}">
+  <!-- End plugin css for this page -->
+  <!-- Layout styles -->
+  <link rel="stylesheet" href="{% static '/css/demo/style.css' %}">
+  <link rel="stylesheet" href="{% static '/css/myStyles/add_products.css' %}">
+  <!-- End layout styles -->
+  <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
+
+  <link rel="stylesheet" href="{% static 'css/datatable.css' %}">
+</head>
+<body>
+<script src="{% static 'js/preloader.js' %}"></script>
+  <div class="body-wrapper">
+    <!-- partial:partials/_sidebar.html -->
+    <aside class="mdc-drawer mdc-drawer--dismissible mdc-drawer--open">
+
+      <div class="mdc-drawer__header">
+        <a href="#" class="brand-logo"><img src="{% static 'images/logo.svg' %}" alt="logo"></a>
+      </div>
+
+      <!-- Side Menu -->
+      <div class="mdc-drawer__content">
+        <div class="mdc-list-group">
+          <nav class="mdc-list mdc-drawer-menu">
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="{% url 'dashboard' %}">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">home</i>
+                Dashboard
+              </a>
+            </div>
+
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-expansion-panel-link" href="#" data-toggle="expansionPanel" data-target="ui-sub-menu">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">dashboard</i>
+                Inventory
+                <i class="mdc-drawer-arrow material-icons">chevron_right</i>
+              </a>
+              <div class="mdc-expansion-panel" id="ui-sub-menu">
+                <nav class="mdc-list mdc-drawer-submenu">
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="{% url 'warehouse' %}">Warehouse</a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="{% url 'mainstore' %}">Main Store</a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="{% url 'branch' %}">Branch</a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="{% url 'purchase_return' %}">Return</a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="{% url 'products_entry' %}">
+                      New Entries
+                    </a>
+                  </div>
+                </nav>
+              </div>
+            </div>
+            
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-expansion-panel-link" href="#" data-toggle="expansionPanel" data-target="transactsubmenu">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pages</i>
+                Transactions
+                <i class="mdc-drawer-arrow material-icons">chevron_right</i>
+              </a>
+              <div class="mdc-expansion-panel" id="transactsubmenu">
+                <nav class="mdc-list mdc-drawer-submenu">
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="{% url 'sales' %}">
+                      Sales
+                    </a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="">
+                      Return
+                    </a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="">
+                      New Entries
+                    </a>
+                  </div>
+                </nav>
+              </div>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-expansion-panel-link" href="#" data-toggle="expansionPanel" data-target="paymentsubmenu">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pages</i>
+                Payment
+                <i class="mdc-drawer-arrow material-icons">chevron_right</i>
+              </a>
+              <div class="mdc-expansion-panel" id="paymentsubmenu">
+                <nav class="mdc-list mdc-drawer-submenu">
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="">
+                      Payment Method
+                    </a>
+                  </div>                  
+                </nav>
+              </div>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-expansion-panel-link" href="#" data-toggle="expansionPanel" data-target="otherssubmenu">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pages</i>
+                Others
+                <i class="mdc-drawer-arrow material-icons">chevron_right</i>
+              </a>
+              <div class="mdc-expansion-panel" id="otherssubmenu">
+                <nav class="mdc-list mdc-drawer-submenu">
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="">
+                      Expenses
+                    </a>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="">
+                      Customers
+                    </a>
+                  </div>                    
+                </nav>
+              </div>
+            </div>
+            <!-- Customers -->
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">grid_on</i>
+                Misc
+              </a>
+            </div>
+          </nav>
+        </div>
+        <!-- Side Menu Ends -->
+
+    </aside>
+    <!-- partial -->
+    <div class="main-wrapper mdc-drawer-app-content">
+      <!-- partial:partials/_navbar.html -->
+      <header class="mdc-top-app-bar">
+        <div class="mdc-top-app-bar__row">
+          <div class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+            <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button sidebar-toggler">menu</button>
+          </div>
+        </div>
+      </header>
+      
+      <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+        <div class="mdc-card p-0">
+          <h6 class="card-title card-padding pb-0">All Products</h6>
+          <div class="table-responsive">
+            <table class="table table-hoverable" id="example">
+              <thead>
+                <tr>
+                    <th class="text-left">PID</th>
+                    <th class="text-left">PRODUCT</th>
+                    <th class="text-left">Type</th>
+                    <th class="text-left">QUANTITY</th>
+                    <th class="text-left">VENDOR</th>
+                    <th class="text-left">DATE</th>
+                    <th class="text-left">INFO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-left">#001</td>
+                    <td class="text-left">IPHONE X 64GB</td>
+                    <td class="text-left">New</td>
+                    <td class="text-left">10</td>
+                    <td class="text-left">China</td>
+                    <td class="text-left">April 27, 2023</td>
+                    <td>
+                      <button style="height: 23px; cursor: pointer; margin: -5px" class="submit-btn">View</button>
+                    </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                    <th class="text-left">PID</th>
+                    <th class="text-left">PRODUCT</th>
+                    <th class="text-left">Type</th>
+                    <th class="text-left">QUANTITY</th>
+                    <th class="text-left">VENDOR</th>
+                    <th class="text-left">DATE</th>
+                    <th class="text-left">INFO</th>
+                </tr>
+            </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+      
+    
+             
+           
+               
+      
+  <!-- plugins:js -->
+  <script src="{% static 'vendors/js/vendor.bundle.base.js' %}"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <script src="{% static 'vendors/chartjs/Chart.min.js' %}"></script>
+  <script src="{% static 'vendors/jvectormap/jquery-jvectormap.min.js' %}"></script>
+  <script src="{% static 'vendors/jvectormap/jquery-jvectormap-world-mill-en.js' %}"></script>
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="{% static 'js/material.js' %}"></script>
+  <script src="{% static 'js/misc.js' %}"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="{% static 'js/dashboard.js' %}"></script>
+  <!-- End custom js for this page-->
+
+
+  <script src="{% static 'js/datatable.js' %}"></script>
+    <script>
+      $(document).ready(function () {
+        $('#example').DataTable();
+    });
+  </script>
+</body>
+</html> 
